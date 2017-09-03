@@ -1,0 +1,123 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <style>
+        #turntable {
+            position: relative;
+        }
+
+        #canvas {
+            border: 1px solid #000;
+            transition: all 6s ease;
+            padding-left: 0;
+            padding-right: 0;
+            border:none;
+            margin-left: auto;
+            margin-right: auto;
+            display: block;
+        }
+
+        #btn {
+            position: absolute;
+            left: 540px;
+            top: 120px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: #fff;
+            line-height: 60px;
+            text-align: center;
+        }
+
+        #btn:after {
+            position: absolute;
+            display: block;
+            content: '';
+            left: 10px;
+            top: -32px;
+            width: 0;
+            height: 0;
+            overflow: hidden;
+            border-width: 20px;
+            border-style: solid;
+            border-color: transparent;
+            border-bottom-color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div id="turntable">
+        <canvas id="canvas" width="300" height="300">No Support</canvas>
+        <a id="btn" href="javascript:;">抽奖</a>
+    </div>
+    <script>
+
+        // 抽奖
+        btn.onclick = function () {
+            $.get("/TurnTable/RandomChoice", null, function (result) {
+                canvas.style.transform = 'rotate(' + result + 'deg)';
+            });
+        }
+
+        function getTable() {
+            $.ajax({
+                type: 'POST',
+                url: '/TurnTable/getTable',
+                success: function (data) {
+                    var dd = JSON.parse(data);
+                    console.log(dd.length);
+                    //宣告畫布
+                    var canvas = document.getElementById('canvas');
+                    //判斷是否支援
+                    if (!canvas.getContext) {
+
+                        alert('No Support');
+                        return;
+                    }
+                    var ctx = canvas.getContext('2d');
+                }
+            })
+        };
+    </script>
+</body>
+</html>
+
+
+<!--
+        window.addEventListener('load', function(){
+            var num = 15;
+            var canvas = document.getElementById('canvas');
+            if(!canvas.getContext){
+                alert('No Support');
+                return;
+            }
+            var ctx = canvas.getContext('2d');
+            for (var i = 0; i < num; i++) {
+                ctx.save();
+                ctx.beginPath();
+                ctx.translate(150, 150);
+                ctx.moveTo(0, 0);
+                ctx.rotate((360 / num * i + 360 / num / 2) * Math.PI/180);
+                ctx.arc(0, 0, 150, 0,  2 * Math.PI / num, false);
+                if (i % 2 == 0) {
+                    ctx.fillStyle = '#4400CC';
+                }else{
+                    ctx.fillStyle = '#FF3333';
+                }
+                ctx.fill();
+                ctx.lineWidth = 0.5;
+                ctx.strokeStyle = '#f48d24';
+                ctx.stroke();
+
+                // 文字
+                ctx.fillStyle = '#fff';
+                ctx.font = "16px sans-serif";
+                ctx.fillText(i + 1, 100, 360 / num);
+                    
+                // 恢复前一个状态
+                ctx.restore();
+            }
+        }, false);
+-->
