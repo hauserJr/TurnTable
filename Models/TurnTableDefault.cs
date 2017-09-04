@@ -6,7 +6,7 @@ using System.Web;
 
 public class TurnTableDefault
 {
-    public string NO { get; set; }
+    public int NO { get; set; }
     /// <summary>
     /// 被選擇的名稱
     /// </summary>
@@ -25,5 +25,4 @@ public class TurnTableDefault
     /// <summary>
     /// 最後產生的角度
     /// </summary>
-    public ChosenValue AngleValue { get; set; }
 }
