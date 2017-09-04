@@ -4,8 +4,9 @@ using System.Linq;
 using System.Web;
 
 
-public class TurnTableItem
+public class TurnTableDefault
 {
+    public string NO { get; set; }
     /// <summary>
     /// 被選擇的名稱
     /// </summary>
@@ -25,9 +26,4 @@ public class TurnTableItem
     /// 最後產生的角度
     /// </summary>
     public ChosenValue AngleValue { get; set; }
-}
-
-public class ChosenValue
-{
-    public string AngleValue { get; set; }
 }
